@@ -3,4 +3,15 @@ name = "file-utils"
 version = "0.1.0"
 authors = ["G. Mantaos <gmantaos@gmail.com>"]
 
-[dependencies]
+description = "Convenience wrappers for file I/O, mostly around binary operations."
+
+documentation = "https://github.com/gmantaos/file-utils"
+homepage = "https://github.com/gmantaos/file-utils"
+repository = "https://github.com/gmantaos/file-utils"
+readme = "README.md"
+license = "MIT"
+license-file = "LICENSE"
+
+keywords = ["file", "bin", "binary", "native", "safe", "read", "write", "convert"]
+categories = ["encoding", "embedded", "filesystem", "parsing"]
+
