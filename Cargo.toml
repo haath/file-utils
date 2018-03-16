@@ -9,7 +9,6 @@ documentation = "https://github.com/gmantaos/file-utils"
 homepage = "https://github.com/gmantaos/file-utils"
 repository = "https://github.com/gmantaos/file-utils"
 readme = "README.md"
-license = "MIT"
 license-file = "LICENSE"
 
 keywords = ["file", "bin", "binary", "native", "safe", "read", "write", "convert"]
