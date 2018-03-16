@@ -1,0 +1,6 @@
+[package]
+name = "file-utils"
+version = "0.1.0"
+authors = ["G. Mantaos <gmantaos@gmail.com>"]
+
+[dependencies]
