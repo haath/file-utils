@@ -2,7 +2,6 @@
 use std::io;
 use std::fs::File;
 
-
 pub trait Read
 {
 	// Conditional
@@ -19,13 +18,13 @@ pub trait Read
 
 	// 32-bit
 	fn read_u32(&mut self)-> io::Result<u32>;
-	fn read_f32(&mut self)-> io::Result<f32>;
 	fn read_i32(&mut self)-> io::Result<i32>;
+	fn read_f32(&mut self)-> io::Result<f32>;
 
 	// 64-bit
 	fn read_u64(&mut self)-> io::Result<u64>;
-	fn read_f64(&mut self)-> io::Result<f64>;
 	fn read_i64(&mut self)-> io::Result<i64>;
+	fn read_f64(&mut self)-> io::Result<f64>;
 }
 
 impl<T> Read for T 
@@ -99,16 +98,16 @@ impl<T> Read for T
 		Ok(bytes_to_u32(buf))
 	}
 
-	fn read_f32(&mut self)-> io::Result<f32>
-	{
-		let num = self.read_u32()?;
-		Ok(num as f32)
-	}
-
 	fn read_i32(&mut self)-> io::Result<i32>
 	{
 		let num = self.read_u32()?;
 		Ok(num as i32)
+	}
+
+	fn read_f32(&mut self)-> io::Result<f32>
+	{
+		let num = self.read_u32()?;
+		Ok(num as f32)
 	}
 
 	/*
@@ -122,16 +121,16 @@ impl<T> Read for T
 		Ok(bytes_to_u64(buf))
 	}
 
-	fn read_f64(&mut self)-> io::Result<f64>
-	{
-		let num = self.read_u64()?;
-		Ok(num as f64)
-	}
-
 	fn read_i64(&mut self)-> io::Result<i64>
 	{
 		let num = self.read_u64()?;
 		Ok(num as i64)
+	}
+
+	fn read_f64(&mut self)-> io::Result<f64>
+	{
+		let num = self.read_u64()?;
+		Ok(num as f64)
 	}
 }
 
