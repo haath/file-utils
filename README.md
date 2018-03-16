@@ -1,5 +1,7 @@
 # file-utils
 
+![Build Status](https://devops.gmantaos.com/buildStatus/icon?job=file-utils)
+
 This crate aims to provide convenient one-liners for file I/O operations that carry no dependencies and don't require unsafe code.
 
 Furthermore, to ensure that multi-byte primitive types and pointers like `usize` are encoded correctly, compilation of the crate will take into account:
