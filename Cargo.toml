@@ -11,6 +11,6 @@ repository = "https://github.com/gmantaos/file-utils"
 readme = "README.md"
 license-file = "LICENSE"
 
-keywords = ["file", "bin", "binary", "native", "safe", "read", "write", "convert"]
+keywords = ["file", "binary", "native", "read", "write"]
 categories = ["encoding", "embedded", "filesystem", "parsing"]
 
