@@ -1,6 +1,5 @@
 
 use std::io;
-use std::fs::File;
 
 pub trait Write
 {
@@ -55,7 +54,6 @@ impl<T> Write for T
 	*/
 	fn write_u8(&mut self, val: u8)-> io::Result<()>
 	{
-		use std::io::Write;
 		self.write_all(&[val])
 	}
 
@@ -69,7 +67,6 @@ impl<T> Write for T
 	*/
 	fn write_u16(&mut self, val: u16)-> io::Result<()>
 	{
-		use std::io::Write;
 		self.write_all(&u16_to_bytes(val))
 	}
 
@@ -83,7 +80,6 @@ impl<T> Write for T
 	*/
 	fn write_u32(&mut self, val: u32)-> io::Result<()>
 	{
-		use std::io::Write;
 		self.write_all(&u32_to_bytes(val))
 	}
 
@@ -102,7 +98,6 @@ impl<T> Write for T
 	*/
 	fn write_u64(&mut self, val: u64)-> io::Result<()>
 	{
-		use std::io::Write;
 		self.write_all(&u64_to_bytes(val))
 	}
 

@@ -1,6 +1,5 @@
 
 use std::io;
-use std::fs::File;
 
 pub trait Read
 {
@@ -58,7 +57,6 @@ impl<T> Read for T
 	*/
 	fn read_u8(&mut self)-> io::Result<u8>
 	{
-		use std::io::Read;
 		let mut buf: [u8; 1] = [0; 1];
 		self.read_exact(&mut buf)?;
 		Ok(buf[0])
@@ -75,10 +73,9 @@ impl<T> Read for T
 	*/
 	fn read_u16(&mut self)-> io::Result<u16>
 	{
-		use std::io::Read;
 		let mut buf: [u8; 2] = [0; 2];
 		self.read_exact(&mut buf)?;
-		Ok(bytes_to_u16(buf))
+		Ok(bytes_to_u16(&buf))
 	}
 
 	fn read_i16(&mut self)-> io::Result<i16>
@@ -92,10 +89,9 @@ impl<T> Read for T
 	*/
 	fn read_u32(&mut self)-> io::Result<u32>
 	{
-		use std::io::Read;
 		let mut buf: [u8; 4] = [0; 4];
 		self.read_exact(&mut buf)?;
-		Ok(bytes_to_u32(buf))
+		Ok(bytes_to_u32(&buf))
 	}
 
 	fn read_i32(&mut self)-> io::Result<i32>
@@ -115,10 +111,9 @@ impl<T> Read for T
 	*/
 	fn read_u64(&mut self)-> io::Result<u64>
 	{
-		use std::io::Read;
 		let mut buf: [u8; 8] = [0; 8];
 		self.read_exact(&mut buf)?;
-		Ok(bytes_to_u64(buf))
+		Ok(bytes_to_u64(&buf))
 	}
 
 	fn read_i64(&mut self)-> io::Result<i64>
@@ -135,23 +130,22 @@ impl<T> Read for T
 }
 
 
-
 #[cfg(target_endian="big")]
-fn bytes_to_u16(x: [u8; 2]) -> u16
+fn bytes_to_u16(x: &[u8; 2]) -> u16
 {
     ((x[0] as u16) <<  8) +
     ((x[1] as u16) <<  0)
 }
 
 #[cfg(target_endian="little")]
-fn bytes_to_u16(x: [u8; 2]) -> u16
+fn bytes_to_u16(x: &[u8; 2]) -> u16
 {
     ((x[1] as u16) <<  8) +
     ((x[0] as u16) <<  0)
 }
 
 #[cfg(target_endian="big")]
-fn bytes_to_u32(x: [u8; 4]) -> u32
+fn bytes_to_u32(x: &[u8; 4]) -> u32
 {
     ((x[0] as u32) << 24) +
     ((x[1] as u32) << 16) +
@@ -160,7 +154,7 @@ fn bytes_to_u32(x: [u8; 4]) -> u32
 }
 
 #[cfg(target_endian="little")]
-fn bytes_to_u32(x: [u8; 4]) -> u32
+fn bytes_to_u32(x: &[u8; 4]) -> u32
 {
     ((x[3] as u32) << 24) +
     ((x[2] as u32) << 16) +
@@ -169,9 +163,9 @@ fn bytes_to_u32(x: [u8; 4]) -> u32
 }
 
 #[cfg(target_endian="big")]
-fn bytes_to_u64(x: [u8; 8]) -> u64
+fn bytes_to_u64(x: &[u8; 8]) -> u64
 {
-    ((x[0] as u64) << 56) +
+    ((*x[0] as u64) << 56) +
     ((x[1] as u64) << 48) +
     ((x[2] as u64) << 40) +
     ((x[3] as u64) << 32) +
@@ -182,7 +176,7 @@ fn bytes_to_u64(x: [u8; 8]) -> u64
 }
 
 #[cfg(target_endian="little")]
-fn bytes_to_u64(x: [u8; 8]) -> u64
+fn bytes_to_u64(x: &[u8; 8]) -> u64
 {
     ((x[7] as u64) << 56) +
     ((x[6] as u64) << 48) +
