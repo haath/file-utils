@@ -16,12 +16,12 @@ Furthermore, to ensure that multi-byte primitive types and pointers like `usize`
 All the methods are implemented directly for any type that implements the `Read` trait, so all you need to do is bring the traits into scope.
 
 ```rust
-extern crate file-utils;
+extern crate file_utils;
 
 use std::io;
 use std::fs::File;
 
-use file-utils::read::Read;		// <--- bring the Read trait into score
+use file_utils::read::Read;		// <--- bring the Read trait into score
 
 fn foo() -> io::Result<()>
 {
