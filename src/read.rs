@@ -28,7 +28,8 @@ pub trait Read
 	fn read_i64(&mut self)-> io::Result<i64>;
 }
 
-impl Read for File
+impl<T> Read for T 
+	where T: io::Read
 {
 	/*
 		Based on architecture

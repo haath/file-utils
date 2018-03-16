@@ -10,18 +10,34 @@ Furthermore, to ensure that multi-byte primitive types and pointers like `usize`
 
 ## Usage
 
-All the methods are implemented directly for the `File` type, so all you need to do is bring the traits into scope.
+
+### Reading binary
+
+All the methods are implemented directly for any type that implements the `Read` trait, so all you need to do is bring the traits into scope.
 
 ```rust
 extern crate file-utils;
 
-use file-utils::read::Read;
-use file-utils::write::Write;
+use std::io;
+use std::fs::File;
+
+use file-utils::read::Read;		// <--- bring the Read trait into score
+
+fn foo() -> io::Result<()>
+{
+	let file = File::create("binary-file")?;
+
+	// Read the first 8 bytes of the file into a u64
+	let uns: u64 = file.read_u64()?;
+
+	// And the next 4 bytes into an f32
+	let flt: f32 = file.read_f32()?;
+
+	Ok(())
+}
 ```
 
-### Reading binary
-
-The following implementations have been made on the `File` type:
+All primitive number types can be read this way
 
 ```rust
 fn read_usize(&mut self)-> io::Result<usize>;
