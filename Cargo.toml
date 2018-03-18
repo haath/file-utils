@@ -1,6 +1,6 @@
 [package]
 name = "file-utils"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["G. Mantaos <gmantaos@gmail.com>"]
 
 description = "Convenience wrappers for file I/O, mostly around binary operations."

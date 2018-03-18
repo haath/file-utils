@@ -3,6 +3,7 @@ extern crate file_utils;
 
 use file_utils::conversions::i::*;
 use file_utils::conversions::u::*;
+use file_utils::conversions::f::*;
 
 #[test]
 pub fn b_to_s1()
@@ -36,5 +37,8 @@ pub fn b_to_s3()
 #[test]
 pub fn b_to_f()
 {
-	let b = [  ]
+	let b = f32_to_bytes(3.14);
+	let f = bytes_to_f32(&b);
+
+	assert_eq!(3.14, f);
 }

@@ -3,6 +3,7 @@ use std::io;
 
 use conversions::u::*;
 use conversions::i::*;
+use conversions::f::*;
 
 pub trait Write
 {
@@ -100,7 +101,7 @@ impl<T> Write for T
 	
 	fn write_f32(&mut self, val: f32)-> io::Result<()>
 	{
-		self.write_u32(val as u32)
+		self.write_all(&f32_to_bytes(val))
 	}
 
 	/*
@@ -118,6 +119,6 @@ impl<T> Write for T
 	
 	fn write_f64(&mut self, val: f64)-> io::Result<()>
 	{
-		self.write_u64(val as u64)
+		self.write_all(&f64_to_bytes(val))
 	}
 }

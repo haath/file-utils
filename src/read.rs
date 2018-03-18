@@ -3,6 +3,7 @@ use std::io;
 
 use conversions::u::*;
 use conversions::i::*;
+use conversions::f::*;
 
 pub trait Read
 {
@@ -115,8 +116,9 @@ impl<T> Read for T
 
 	fn read_f32(&mut self)-> io::Result<f32>
 	{
-		let num = self.read_u32()?;
-		Ok(num as f32)
+		let mut buf: [u8; 4] = [0; 4];
+		self.read_exact(&mut buf)?;
+		Ok(bytes_to_f32(&buf))
 	}
 
 	/*
@@ -138,8 +140,9 @@ impl<T> Read for T
 
 	fn read_f64(&mut self)-> io::Result<f64>
 	{
-		let num = self.read_u64()?;
-		Ok(num as f64)
+		let mut buf: [u8; 8] = [0; 8];
+		self.read_exact(&mut buf)?;
+		Ok(bytes_to_f64(&buf))
 	}
 }
 
