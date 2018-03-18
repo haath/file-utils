@@ -32,3 +32,9 @@ pub fn b_to_s3()
 
 	assert_eq!(252645135, i);
 }
+
+#[test]
+pub fn b_to_f()
+{
+	let b = [  ]
+}

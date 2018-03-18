@@ -1,6 +1,9 @@
 
 use std::io;
 
+use conversions::u::*;
+use conversions::i::*;
+
 pub trait Write
 {
 	// Conditional
@@ -44,9 +47,16 @@ impl<T> Write for T
 		self.write_u32(val as u32)
 	}
 
+	#[cfg(target_pointer_width = "64")]
 	fn write_isize(&mut self, val: isize)-> io::Result<()>
 	{
-		self.write_usize(val as usize)
+		self.write_i64(val as i64)
+	}
+
+	#[cfg(target_pointer_width = "32")]
+	fn write_isize(&mut self, val: isize)-> io::Result<()>
+	{
+		self.write_i32(val as i32)
 	}
 
 	/*
@@ -72,7 +82,7 @@ impl<T> Write for T
 
 	fn write_i16(&mut self, val: i16)-> io::Result<()>
 	{
-		self.write_u16(val as u16)
+		self.write_all(&i16_to_bytes(val))
 	}
 
 	/*
@@ -85,7 +95,7 @@ impl<T> Write for T
 
 	fn write_i32(&mut self, val: i32)-> io::Result<()>
 	{
-		self.write_u32(val as u32)
+		self.write_all(&i32_to_bytes(val))
 	}
 	
 	fn write_f32(&mut self, val: f32)-> io::Result<()>
@@ -103,81 +113,11 @@ impl<T> Write for T
 
 	fn write_i64(&mut self, val: i64)-> io::Result<()>
 	{
-		self.write_u64(val as u64)
+		self.write_all(&i64_to_bytes(val))
 	}
 	
 	fn write_f64(&mut self, val: f64)-> io::Result<()>
 	{
 		self.write_u64(val as u64)
 	}
-}
-
-#[cfg(target_endian="big")]
-fn u16_to_bytes(x: u16) -> [u8; 2]
-{
-    [
-    	((x >>  8) & 0xff) as u8,
-    	((x >>  0) & 0xff) as u8
-	]
-}
-
-#[cfg(target_endian="little")]
-fn u16_to_bytes(x: u16) -> [u8; 2]
-{
-    [
-		((x >>  0) & 0xff) as u8,
-    	((x >>  8) & 0xff) as u8
-	]
-}
-
-#[cfg(target_endian="big")]
-fn u32_to_bytes(x: u32) -> [u8; 4]
-{
-    [
-		((x >> 24) & 0xff) as u8,
-    	((x >> 16) & 0xff) as u8,
-    	((x >>  8) & 0xff) as u8,
-    	((x >>  0) & 0xff) as u8
-	]
-}
-
-#[cfg(target_endian="little")]
-fn u32_to_bytes(x: u32) -> [u8; 4]
-{
-    [
-		((x >>  0) & 0xff) as u8,
-    	((x >>  8) & 0xff) as u8,
-    	((x >> 16) & 0xff) as u8,
-    	((x >> 24) & 0xff) as u8
-	]
-}
-
-#[cfg(target_endian="big")]
-fn u64_to_bytes(x: u64) -> [u8; 8]
-{
-    [
-		((x >> 56) & 0xff) as u8,
-    	((x >> 48) & 0xff) as u8,
-    	((x >> 40) & 0xff) as u8,
-    	((x >> 32) & 0xff) as u8,
-		((x >> 24) & 0xff) as u8,
-    	((x >> 16) & 0xff) as u8,
-    	((x >>  8) & 0xff) as u8,
-    	((x >>  0) & 0xff) as u8
-	]
-}
-
-#[cfg(target_endian="little")]
-fn u64_to_bytes(x: u64) -> [u8; 8]
-{
-    [
-		((x >>  0) & 0xff) as u8,
-    	((x >>  8) & 0xff) as u8,
-    	((x >> 16) & 0xff) as u8,
-    	((x >> 24) & 0xff) as u8,
-		((x >> 32) & 0xff) as u8,
-    	((x >> 40) & 0xff) as u8,
-    	((x >> 48) & 0xff) as u8,
-    	((x >> 56) & 0xff) as u8
-	]
 }

@@ -55,3 +55,74 @@ pub fn bytes_to_i64(x: &[u8; 8]) -> i64
     ((x[1] as i64) <<  8) +
     ((x[0] as i64) <<  0)
 }
+
+
+#[cfg(target_endian="big")]
+pub fn i16_to_bytes(x: i16) -> [u8; 2]
+{
+    [
+    	((x >>  8) & 0xff) as u8,
+    	((x >>  0) & 0xff) as u8
+	]
+}
+
+#[cfg(target_endian="little")]
+pub fn i16_to_bytes(x: i16) -> [u8; 2]
+{
+    [
+		((x >>  0) & 0xff) as u8,
+    	((x >>  8) & 0xff) as u8
+	]
+}
+
+#[cfg(target_endian="big")]
+pub fn i32_to_bytes(x: i32) -> [u8; 4]
+{
+    [
+		((x >> 24) & 0xff) as u8,
+    	((x >> 16) & 0xff) as u8,
+    	((x >>  8) & 0xff) as u8,
+    	((x >>  0) & 0xff) as u8
+	]
+}
+
+#[cfg(target_endian="little")]
+pub fn i32_to_bytes(x: i32) -> [u8; 4]
+{
+    [
+		((x >>  0) & 0xff) as u8,
+    	((x >>  8) & 0xff) as u8,
+    	((x >> 16) & 0xff) as u8,
+    	((x >> 24) & 0xff) as u8
+	]
+}
+
+#[cfg(target_endian="big")]
+pub fn i64_to_bytes(x: i64) -> [u8; 8]
+{
+    [
+		((x >> 56) & 0xff) as u8,
+    	((x >> 48) & 0xff) as u8,
+    	((x >> 40) & 0xff) as u8,
+    	((x >> 32) & 0xff) as u8,
+		((x >> 24) & 0xff) as u8,
+    	((x >> 16) & 0xff) as u8,
+    	((x >>  8) & 0xff) as u8,
+    	((x >>  0) & 0xff) as u8
+	]
+}
+
+#[cfg(target_endian="little")]
+pub fn i64_to_bytes(x: i64) -> [u8; 8]
+{
+    [
+		((x >>  0) & 0xff) as u8,
+    	((x >>  8) & 0xff) as u8,
+    	((x >> 16) & 0xff) as u8,
+    	((x >> 24) & 0xff) as u8,
+		((x >> 32) & 0xff) as u8,
+    	((x >> 40) & 0xff) as u8,
+    	((x >> 48) & 0xff) as u8,
+    	((x >> 56) & 0xff) as u8
+	]
+}
