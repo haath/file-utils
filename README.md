@@ -6,7 +6,7 @@
 
 This crate aims to provide convenient one-liners for file I/O operations that carry no dependencies and don't require unsafe code.
 
-Furthermore, to ensure that multi-byte primitive types and pointers like `usize` are encoded correctly, compilation of the crate will take into account:
+Furthermore, to ensure that multi-byte primitive types and pointers like `usize` are encoded correctly, compilation of the crate takes into account:
 
 - Architecture (32-bit vs 64-bit)
 - Endianness
@@ -29,7 +29,7 @@ use file_utils::read::Read;		// <--- bring the Read trait into scope
 
 fn foo() -> io::Result<()>
 {
-	let file = File::open("binary-file")?;
+	let mut file = File::open("binary-file")?;
 
 	// Read the first 8 bytes of the file into a u64
 	let uns: u64 = file.read_u64()?;
@@ -80,7 +80,7 @@ use file_utils::write::Write;		// <--- bring the Write trait into scope
 
 fn foo() -> io::Result<()>
 {
-	let file = File::create("binary-file")?;
+	let file mut = File::create("binary-file")?;
 
 	// Write a usize to the file, which will either be 4 or 8 bytes depending on architecture
 	file.write_usize(12)?;
