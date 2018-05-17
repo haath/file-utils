@@ -2,7 +2,7 @@
 
 [![crates.io](https://img.shields.io/crates/v/file-utils.svg)](https://crates.io/crates/file-utils)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Build Status](https://devops.gmantaos.com/buildStatus/icon?job=file-utils)
+[![Build Status](https://travis-ci.org/gmantaos/file-utils.svg?branch=master)](https://travis-ci.org/gmantaos/file-utils)
 
 This crate aims to provide convenient one-liners for file I/O operations that carry no dependencies and don't require unsafe code.
 
