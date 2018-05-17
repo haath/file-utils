@@ -5,13 +5,7 @@ notifications:
     on_success: never
     on_failure: always
 
-jobs:
-  include:
-    -stage: build
-    script: cargo build --verbose --all
-    -stage: test
-    script: cargo test --verbose --all
-    -stage: publish
-    if: tag IS present
-    script: 
-      - cargo login $CARGO_API_KEY
+script: 
+  - cargo build --verbose --all
+  - cargo test --verbose --all
+  - cargo login $CARGO_API_KEY
