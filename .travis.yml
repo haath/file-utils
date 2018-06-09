@@ -13,7 +13,7 @@ deploy:
   on:
     tags: true
     all_branches: true
-  file: target/package/roaring-$TRAVIS_TAG.crate
+  file: target/package/file-utils-$TRAVIS_TAG.crate
   skip_cleanup: true
 
 before_deploy:
