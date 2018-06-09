@@ -13,9 +13,13 @@ deploy:
   on:
     tags: true
     all_branches: true
+  file: target/package/roaring-$TRAVIS_TAG.crate
+  skip_cleanup: true
+
 before_deploy:
 - cargo doc
 - cargo package
+
 after_deploy:
 - cargo publish --token $CARGO_API_KEY
     
