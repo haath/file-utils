@@ -3,9 +3,24 @@ language: rust
 notifications:
   email: 
     on_success: never
-    on_failure: always
+    on_failure: never
 
 script: 
   - cargo build --verbose --all
   - cargo test --verbose --all
-  - cargo login $CARGO_API_KEY
+
+# Only deploy on GitHub releases
+deploy:
+  provider: releases
+  on:
+    tags: true
+    all_branches: true
+
+before_deploy:
+  - cargo doc
+  - cargo package
+
+# Deploy to crates.io
+after_deploy:
+  - cargo publish --token $CARGO_API_KEY
+
